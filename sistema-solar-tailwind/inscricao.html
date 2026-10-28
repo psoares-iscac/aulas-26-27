@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inscrição numa noite de observação astronómica.">
+  <title>Inscrição | Sistema Solar</title>
+
+  <!-- Tailwind CSS v4 (versão "browser") + tema do site (igual em todas as páginas) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-fundo: #0b1020;
+      --color-superficie: #161d33;
+      --color-texto: #e6e9f2;
+      --color-suave: #a3abc2;
+      --color-destaque: #ff8a3d;
+      --color-destaque-escura: #e06a1c;
+      --color-destaque-claro: #ffb27a;
+      --color-borda: #2a3352;
+      --color-erro: #ff5c7a;
+      --color-erro-claro: #ff8fa3;
+      --color-sucesso: #3ccf91;
+      --container-site: 1100px;
+    }
+  </style>
+</head>
+<body class="bg-fundo text-texto leading-relaxed">
+
+  <header id="topo" class="sticky top-0 z-10 bg-superficie border-b border-borda">
+    <div class="w-full max-w-site mx-auto px-4 py-3 flex flex-col items-center gap-2 md:flex-row md:justify-between">
+      <a href="index.html" class="text-xl font-bold text-texto">☀ Sistema Solar</a>
+      <nav aria-label="Navegação principal">
+        <ul class="flex flex-wrap justify-center gap-x-4 gap-y-2">
+          <li><a href="index.html" class="py-1 border-b-2 border-transparent text-suave hover:text-texto hover:border-destaque">Início</a></li>
+          <li><a href="index.html#planetas" class="py-1 border-b-2 border-transparent text-suave hover:text-texto hover:border-destaque">Planetas</a></li>
+          <li><a href="marte.html" class="py-1 border-b-2 border-transparent text-suave hover:text-texto hover:border-destaque">Marte</a></li>
+          <li><a href="inscricao.html" aria-current="page" class="py-1 border-b-2 border-destaque text-texto">Inscrição</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="w-full max-w-site mx-auto px-4">
+
+    <nav class="py-4 text-[0.9rem] text-suave" aria-label="Trilho de navegação">
+      <a href="index.html" class="text-destaque underline hover:text-destaque-claro">Início</a> / <span>Inscrição</span>
+    </nav>
+
+    <div class="grid grid-cols-1 gap-8 pb-12 lg:grid-cols-[2fr_1fr]">
+
+      <!-- ===== FORMULÁRIO ===== -->
+      <section>
+        <p class="inline-block mb-2 text-[0.8rem] uppercase tracking-[0.08em] text-destaque">Atividade gratuita</p>
+        <h1 class="mb-4 text-[clamp(1.8rem,5vw,3rem)] font-bold leading-tight">Noite de observação astronómica</h1>
+        <p class="my-4 text-suave">
+          Junta-te a nós para observar a Lua e os planetas ao telescópio.
+          Preenche o formulário: os campos com <span class="text-destaque" aria-hidden="true">*</span>
+          são obrigatórios.
+        </p>
+
+        <!--
+          action → para onde os dados são enviados.
+          method → "get" põe os dados no URL (depois de enviar, vejam a barra de endereço!).
+        -->
+        <form class="flex flex-col gap-6 mt-6" action="inscricao.html" method="get">
+
+          <input type="hidden" name="origem" value="site-sistema-solar">
+
+          <!-- ===== GRUPO 1 =====
+               min-w-0 → evita que o fieldset rebente a grelha em ecrãs estreitos -->
+          <fieldset class="flex flex-col gap-5 min-w-0 p-5 rounded-xl border border-borda bg-superficie md:px-8 md:py-6">
+            <legend class="px-2 text-[1.1rem] font-bold">Os teus dados</legend>
+
+            <!-- 1 coluna no telemóvel, 2 a partir de md -->
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+              <!-- md:col-span-full → este campo ocupa a linha toda -->
+              <div class="flex flex-col gap-1.5 md:col-span-full">
+                <label for="nome" class="text-[0.95rem] font-semibold">Nome completo <span class="text-destaque" aria-hidden="true">*</span></label>
+                <!--
+                  ESTILO DAS CAIXAS DE TEXTO:
+                  peer               → marca o input como "irmão" a observar (ver <small> abaixo)
+                  focus-visible:...  → campo a ser editado: borda laranja + anel suave
+                  user-invalid:...   → vermelho, mas só DEPOIS de o utilizador mexer no campo
+                  user-valid:...     → verde quando está correto
+                -->
+                <input type="text" id="nome" name="nome"
+                       placeholder="Ex: Maria Silva"
+                       autocomplete="name"
+                       minlength="3" required
+                       aria-describedby="ajuda-nome"
+                       class="peer w-full px-3 py-2.5 rounded-lg border border-borda bg-fundo text-texto placeholder:text-[#6b7494] transition focus-visible:outline-none focus-visible:border-destaque focus-visible:ring-3 focus-visible:ring-destaque/30 user-valid:border-sucesso user-invalid:border-erro">
+                <!--
+                  MENSAGEM DE AJUDA (sem JavaScript!):
+                  invisible opacity-0 → escondida, mas continua a ocupar o seu espaço
+                  peer-user-invalid:  → aparece quando o input IRMÃO anterior (peer) é inválido
+                -->
+                <small id="ajuda-nome" class="invisible opacity-0 text-[0.85rem] text-erro-claro transition-opacity peer-user-invalid:visible peer-user-invalid:opacity-100">Escreve pelo menos 3 letras.</small>
+              </div>
+
+              <!-- type="email": o browser valida o formato sozinho -->
+              <div class="flex flex-col gap-1.5">
+                <label for="email" class="text-[0.95rem] font-semibold">Email <span class="text-destaque" aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email"
+                       placeholder="nome@exemplo.pt"
+                       autocomplete="email" required
+                       aria-describedby="ajuda-email"
+                       class="peer w-full px-3 py-2.5 rounded-lg border border-borda bg-fundo text-texto placeholder:text-[#6b7494] transition focus-visible:outline-none focus-visible:border-destaque focus-visible:ring-3 focus-visible:ring-destaque/30 user-valid:border-sucesso user-invalid:border-erro">
+                <small id="ajuda-email" class="invisible opacity-0 text-[0.85rem] text-erro-claro transition-opacity peer-user-invalid:visible peer-user-invalid:opacity-100">Formato esperado: nome@dominio.pt</small>
+              </div>
+
+              <!-- type="tel" não valida nada sozinho: é o pattern que impõe o formato -->
+              <div class="flex flex-col gap-1.5">
+                <label for="telefone" class="text-[0.95rem] font-semibold">Telemóvel <span class="text-destaque" aria-hidden="true">*</span></label>
+                <input type="tel" id="telefone" name="telefone"
+                       placeholder="912345678"
+                       autocomplete="tel"
+                       pattern="(9[1236][0-9]{7}|2[0-9]{8})"
+                       required
+                       aria-describedby="ajuda-telefone"
+                       class="peer w-full px-3 py-2.5 rounded-lg border border-borda bg-fundo text-texto placeholder:text-[#6b7494] transition focus-visible:outline-none focus-visible:border-destaque focus-visible:ring-3 focus-visible:ring-destaque/30 user-valid:border-sucesso user-invalid:border-erro">
+                <small id="ajuda-telefone" class="invisible opacity-0 text-[0.85rem] text-erro-claro transition-opacity peer-user-invalid:visible peer-user-invalid:opacity-100">9 dígitos, sem espaços (ex: 912345678).</small>
+              </div>
+
+              <!-- scheme-dark → calendário nativo visível em fundo escuro -->
+              <div class="flex flex-col gap-1.5">
+                <label for="nascimento" class="text-[0.95rem] font-semibold">Data de nascimento</label>
+                <input type="date" id="nascimento" name="nascimento"
+                       min="1920-01-01" max="2020-12-31"
+                       autocomplete="bday"
+                       class="w-full px-3 py-2.5 rounded-lg border border-borda bg-fundo text-texto scheme-dark transition focus-visible:outline-none focus-visible:border-destaque focus-visible:ring-3 focus-visible:ring-destaque/30 user-valid:border-sucesso user-invalid:border-erro">
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                <label for="codigo-postal" class="text-[0.95rem] font-semibold">Código postal</label>
+                <input type="text" id="codigo-postal" name="codigo_postal"
+                       placeholder="0000-000"
+                       pattern="[0-9]{4}-[0-9]{3}"
+                       inputmode="numeric"
+                       autocomplete="postal-code"
+                       aria-describedby="ajuda-cp"
+                       class="peer w-full px-3 py-2.5 rounded-lg border border-borda bg-fundo text-texto placeholder:text-[#6b7494] transition focus-visible:outline-none focus-visible:border-destaque focus-visible:ring-3 focus-visible:ring-destaque/30 user-valid:border-sucesso user-invalid:border-erro">
+                <small id="ajuda-cp" class="invisible opacity-0 text-[0.85rem] text-erro-claro transition-opacity peer-user-invalid:visible peer-user-invalid:opacity-100">Formato: 4 dígitos, hífen, 3 dígitos.</small>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <!-- ===== GRUPO 2 ===== -->
+          <fieldset class="flex flex-col gap-5 min-w-0 p-5 rounded-xl border border-borda bg-superficie md:px-8 md:py-6">
+            <legend class="px-2 text-[1.1rem] font-bold">A sessão</legend>
+
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+              <div class="flex flex-col gap-1.5">
+                <label for="sessao" class="text-[0.95rem] font-semibold">Sessão <span class="text-destaque" aria-hidden="true">*</span></label>
+                <select id="sessao" name="sessao" required
+                        class="w-full px-3 py-2.5 rounded-lg border border-borda bg-fundo text-texto transition focus-visible:outline-none focus-visible:border-destaque focus-visible:ring-3 focus-visible:ring-destaque/30 user-invalid:border-erro">
+                  <option value="">— Escolhe uma sessão —</option>
+                  <option value="lua">A Lua e as suas crateras</option>
+                  <option value="jupiter">Júpiter e as suas luas</option>
+                  <option value="saturno">Os anéis de Saturno</option>
+                </select>
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                <label for="pessoas" class="text-[0.95rem] font-semibold">Número de pessoas</label>
+                <input type="number" id="pessoas" name="pessoas"
+                       min="1" max="5" step="1" value="1"
+                       aria-describedby="ajuda-pessoas"
+                       class="peer w-full px-3 py-2.5 rounded-lg border border-borda bg-fundo text-texto transition focus-visible:outline-none focus-visible:border-destaque focus-visible:ring-3 focus-visible:ring-destaque/30 user-valid:border-sucesso user-invalid:border-erro">
+                <small id="ajuda-pessoas" class="invisible opacity-0 text-[0.85rem] text-erro-claro transition-opacity peer-user-invalid:visible peer-user-invalid:opacity-100">Entre 1 e 5 pessoas.</small>
+              </div>
+
+            </div>
+
+            <!-- RADIO: escolha única.
+                 Cada opção é um "comprimido" (rounded-full).
+                 has-checked: → estiliza o LABEL quando o input lá dentro está marcado.
+                 accent-destaque → muda a cor nativa do radio/checkbox. -->
+            <fieldset class="flex flex-wrap gap-x-4 gap-y-2 min-w-0">
+              <legend class="mb-2 text-[0.95rem] font-semibold">Já usaste um telescópio? <span class="text-destaque" aria-hidden="true">*</span></legend>
+              <label class="flex items-center gap-2 px-3 py-2 rounded-full border border-borda cursor-pointer transition-colors hover:border-destaque has-checked:border-destaque has-checked:bg-destaque/12">
+                <input type="radio" name="experiencia" value="nunca" required class="size-[1.1rem] accent-destaque"> Nunca
+              </label>
+              <label class="flex items-center gap-2 px-3 py-2 rounded-full border border-borda cursor-pointer transition-colors hover:border-destaque has-checked:border-destaque has-checked:bg-destaque/12">
+                <input type="radio" name="experiencia" value="algumas" class="size-[1.1rem] accent-destaque"> Algumas vezes
+              </label>
+              <label class="flex items-center gap-2 px-3 py-2 rounded-full border border-borda cursor-pointer transition-colors hover:border-destaque has-checked:border-destaque has-checked:bg-destaque/12">
+                <input type="radio" name="experiencia" value="tenho" class="size-[1.1rem] accent-destaque"> Tenho o meu próprio
+              </label>
+            </fieldset>
+
+            <!-- CHECKBOX: escolha múltipla -->
+            <fieldset class="flex flex-wrap gap-x-4 gap-y-2 min-w-0">
+              <legend class="mb-2 text-[0.95rem] font-semibold">O que te interessa mais?</legend>
+              <label class="flex items-center gap-2 px-3 py-2 rounded-full border border-borda cursor-pointer transition-colors hover:border-destaque has-checked:border-destaque has-checked:bg-destaque/12">
+                <input type="checkbox" name="interesses" value="planetas" class="size-[1.1rem] accent-destaque"> Planetas
+              </label>
+              <label class="flex items-center gap-2 px-3 py-2 rounded-full border border-borda cursor-pointer transition-colors hover:border-destaque has-checked:border-destaque has-checked:bg-destaque/12">
+                <input type="checkbox" name="interesses" value="estrelas" class="size-[1.1rem] accent-destaque"> Estrelas e constelações
+              </label>
+              <label class="flex items-center gap-2 px-3 py-2 rounded-full border border-borda cursor-pointer transition-colors hover:border-destaque has-checked:border-destaque has-checked:bg-destaque/12">
+                <input type="checkbox" name="interesses" value="fotografia" class="size-[1.1rem] accent-destaque"> Astrofotografia
+              </label>
+            </fieldset>
+
+            <!-- resize-y → só deixa redimensionar na vertical -->
+            <div class="flex flex-col gap-1.5">
+              <label for="mensagem" class="text-[0.95rem] font-semibold">Perguntas ou observações</label>
+              <textarea id="mensagem" name="mensagem" rows="4" maxlength="300"
+                        placeholder="Ex: posso levar binóculos?"
+                        aria-describedby="ajuda-mensagem"
+                        class="w-full px-3 py-2.5 rounded-lg border border-borda bg-fundo text-texto placeholder:text-[#6b7494] resize-y transition focus-visible:outline-none focus-visible:border-destaque focus-visible:ring-3 focus-visible:ring-destaque/30"></textarea>
+              <small id="ajuda-mensagem" class="text-[0.85rem] text-suave">Máximo de 300 caracteres.</small>
+            </div>
+          </fieldset>
+
+          <!-- Checkbox obrigatória (texto corrido normal) -->
+          <label class="block cursor-pointer">
+            <input type="checkbox" name="termos" value="aceito" required class="inline-block size-[1.1rem] mr-1.5 align-[-0.15rem] accent-destaque">
+            Li e aceito o <a href="#regulamento" class="text-destaque underline hover:text-destaque-claro">regulamento da atividade</a>.<span class="text-destaque" aria-hidden="true">*</span>
+          </label>
+
+          <!-- Botões: empilhados no telemóvel, lado a lado a partir de md -->
+          <div class="flex flex-col gap-3 md:flex-row">
+            <button type="submit" class="px-6 py-3 rounded-xl bg-destaque text-[#1a1a1a] font-semibold text-center cursor-pointer transition-colors hover:bg-destaque-escura hover:text-white focus:bg-destaque-escura focus:text-white">Enviar inscrição</button>
+            <button type="reset" class="px-6 py-3 rounded-xl border border-borda bg-transparent text-texto font-semibold text-center cursor-pointer transition-colors hover:bg-superficie focus:bg-superficie">Limpar</button>
+          </div>
+
+        </form>
+      </section>
+
+      <!-- ===== BARRA LATERAL ===== -->
+      <aside class="self-start p-6 rounded-xl border border-borda bg-superficie lg:sticky lg:top-20">
+        <h2 class="mb-4 text-center text-xl font-bold leading-tight">Como funciona</h2>
+
+        <ul class="flex flex-col gap-4 mb-6">
+          <!-- shrink-0 → o ícone não encolhe quando o texto é longo -->
+          <li class="flex items-start gap-3 text-[0.95rem] text-suave">
+            <svg class="size-6 shrink-0 mt-0.5 text-destaque" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>
+            </svg>
+            <div><strong class="text-texto">Quando</strong><br>Sextas-feiras, depois do pôr do sol</div>
+          </li>
+          <li class="flex items-start gap-3 text-[0.95rem] text-suave">
+            <svg class="size-6 shrink-0 mt-0.5 text-destaque" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+            </svg>
+            <div><strong class="text-texto">Duração</strong><br>Cerca de 2 horas</div>
+          </li>
+          <li class="flex items-start gap-3 text-[0.95rem] text-suave">
+            <svg class="size-6 shrink-0 mt-0.5 text-destaque" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>
+            </svg>
+            <div><strong class="text-texto">Onde</strong><br>Pátio da escola (ou na sala, se chover)</div>
+          </li>
+          <li class="flex items-start gap-3 text-[0.95rem] text-suave">
+            <svg class="size-6 shrink-0 mt-0.5 text-destaque" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
+            </svg>
+            <div><strong class="text-texto">Leva</strong><br>Roupa quente e uma lanterna com luz vermelha</div>
+          </li>
+        </ul>
+
+        <section id="regulamento" class="pt-4 border-t border-borda text-[0.9rem] text-suave scroll-mt-24">
+          <h3 class="mb-2 text-base font-bold text-texto">Regulamento</h3>
+          <p>A participação é gratuita. Os menores de 16 anos devem vir acompanhados por um adulto.
+             Se o céu estiver encoberto, a sessão é adiada.</p>
+        </section>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer class="py-6 bg-superficie border-t border-borda text-[0.9rem] text-suave">
+    <div class="w-full max-w-site mx-auto px-4 flex flex-col items-center gap-2 text-center md:flex-row md:justify-between md:text-left">
+      <p>Projeto escolar · Sistema Solar</p>
+      <ul class="flex flex-wrap justify-center gap-4">
+        <li><a href="https://science.nasa.gov/skywatching/" target="_blank" rel="noopener" class="text-destaque underline hover:text-destaque-claro">NASA Skywatching</a></li>
+        <li><a href="https://www.esa.int/Science_Exploration/Space_Science" target="_blank" rel="noopener" class="text-destaque underline hover:text-destaque-claro">ESA</a></li>
+        <li><a href="#topo" class="text-destaque underline hover:text-destaque-claro">Voltar ao topo ↑</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

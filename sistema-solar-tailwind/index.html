@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- scroll-smooth → deslocamento suave nas âncoras (#) -->
+<html lang="pt-PT" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Uma viagem pelos planetas do Sistema Solar.">
+  <title>Sistema Solar | Início</title>
+
+  <!-- =========================================================
+       TAILWIND CSS v4 (versão "browser")
+       Este script lê as classes escritas no HTML e gera o CSS
+       no próprio browser. Já não há ficheiro estilos.css!
+       Ótimo para aprender; num site real usa-se o Tailwind CLI ou o Vite.
+       ========================================================= -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- TEMA: as antigas variáveis do :root passam a ser cores do Tailwind.
+       --color-destaque  → cria bg-destaque, text-destaque, border-destaque...
+       --container-site  → cria max-w-site -->
+  <style type="text/tailwindcss">
+    @theme {
+      --color-fundo: #0b1020;
+      --color-superficie: #161d33;
+      --color-texto: #e6e9f2;
+      --color-suave: #a3abc2;
+      --color-destaque: #ff8a3d;
+      --color-destaque-escura: #e06a1c;
+      --color-destaque-claro: #ffb27a;
+      --color-borda: #2a3352;
+      --container-site: 1100px;
+    }
+  </style>
+</head>
+<body class="bg-fundo text-texto leading-relaxed">
+
+  <!-- ===== CABEÇALHO =====
+       sticky top-0 z-10 → fica preso no topo ao fazer scroll -->
+  <header id="topo" class="sticky top-0 z-10 bg-superficie border-b border-borda">
+    <!-- Mobile first: flex-col (logo em cima, menu em baixo);
+         a partir de md: flex-row com logo à esquerda e menu à direita -->
+    <div class="w-full max-w-site mx-auto px-4 py-3 flex flex-col items-center gap-2 md:flex-row md:justify-between">
+      <a href="index.html" class="text-xl font-bold text-texto">☀ Sistema Solar</a>
+
+      <nav aria-label="Navegação principal">
+        <ul class="flex flex-wrap justify-center gap-x-4 gap-y-2">
+          <!-- Link ativo: texto claro e risco laranja por baixo -->
+          <li><a href="index.html" aria-current="page" class="py-1 border-b-2 border-destaque text-texto">Início</a></li>
+          <li><a href="#planetas" class="py-1 border-b-2 border-transparent text-suave hover:text-texto hover:border-destaque">Planetas</a></li>
+          <li><a href="marte.html" class="py-1 border-b-2 border-transparent text-suave hover:text-texto hover:border-destaque">Marte</a></li>
+          <li><a href="inscricao.html" class="py-1 border-b-2 border-transparent text-suave hover:text-texto hover:border-destaque">Inscrição</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO =====
+         O gradiente radial usa um valor arbitrário: bg-[...]
+         (os espaços dentro dos [ ] escrevem-se com _ ) -->
+    <section class="py-12 md:py-20 bg-[radial-gradient(circle_at_80%_30%,#2a1f3d,var(--color-fundo)_60%)]">
+      <!-- Grelha: 1 coluna no telemóvel; a partir de md, 3fr + 2fr -->
+      <div class="w-full max-w-site mx-auto px-4 grid grid-cols-1 gap-8 items-center md:grid-cols-[3fr_2fr]">
+        <div>
+          <p class="inline-block mb-2 text-[0.8rem] uppercase tracking-[0.08em] text-destaque">Astronomia para curiosos</p>
+          <!-- Tamanho de letra fluido com clamp(mínimo, ideal, máximo) -->
+          <h1 class="mb-4 text-[clamp(1.8rem,5vw,3rem)] font-bold leading-tight">A nossa vizinhança no espaço</h1>
+          <p class="my-4 max-w-[55ch] text-suave">
+            O Sistema Solar formou-se há cerca de 4,6 mil milhões de anos.
+            No centro está o Sol e, à sua volta, giram oito planetas,
+            centenas de luas e milhões de asteroides e cometas.
+          </p>
+          <a href="#planetas" class="inline-block px-6 py-3 rounded-xl bg-destaque text-[#1a1a1a] font-semibold transition-colors hover:bg-destaque-escura hover:text-white focus:bg-destaque-escura focus:text-white">Explorar os planetas</a>
+        </div>
+
+        <!-- order-first → no telemóvel a imagem aparece primeiro;
+             md:order-none → volta para a direita -->
+        <img
+          src="img/sol.svg"
+          alt="Ilustração do Sol com um brilho alaranjado"
+          class="w-[70%] max-w-[360px] mx-auto order-first md:w-full md:order-none"
+          width="400" height="400">
+      </div>
+    </section>
+
+    <!-- ===== LISTA DE PLANETAS (CARTÕES) ===== -->
+    <!-- scroll-mt-20 → o título não fica tapado pelo cabeçalho fixo -->
+    <section id="planetas" class="py-12 scroll-mt-20">
+      <div class="w-full max-w-site mx-auto px-4">
+        <h2 class="mb-4 text-center text-[clamp(1.4rem,3vw,1.9rem)] font-bold leading-tight">Quatro planetas em destaque</h2>
+        <p class="max-w-[60ch] mx-auto mb-8 text-center text-suave">
+          Dois planetas rochosos e dois gigantes gasosos.
+          Repara como as diferenças de tamanho são enormes!
+        </p>
+
+        <!-- 1 coluna no telemóvel, 2 em sm, 4 em lg -->
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+          <!-- Cartão: hover:-translate-y-1 → sobe 4px ao passar o rato -->
+          <article class="flex flex-col overflow-hidden rounded-xl border border-borda bg-superficie transition-transform duration-200 hover:-translate-y-1">
+            <!-- aspect-square + object-cover → imagem sempre quadrada -->
+            <img src="img/terra.svg" alt="Ilustração do planeta Terra" class="w-full aspect-square object-cover p-6 bg-[#0e1428]" width="300" height="300">
+            <!-- grow → todos os cartões ficam com a mesma altura -->
+            <div class="flex flex-col grow p-5">
+              <h3 class="text-lg font-bold leading-tight">Terra</h3>
+              <!-- grow no parágrafo → empurra o link para o fundo do cartão -->
+              <p class="grow my-4 text-suave">O único planeta conhecido com vida. Cerca de 71% da superfície está coberta por água.</p>
+              <a href="https://science.nasa.gov/earth/" target="_blank" rel="noopener" class="font-semibold text-destaque hover:text-destaque-claro">Saber mais na NASA ↗</a>
+            </div>
+          </article>
+
+          <article class="flex flex-col overflow-hidden rounded-xl border border-borda bg-superficie transition-transform duration-200 hover:-translate-y-1">
+            <!-- Fotografia: sem padding, fundo preto -->
+            <img
+              src="img/marte-osiris-400.jpg"
+              srcset="img/marte-osiris-400.jpg 400w,
+                      img/marte-osiris-800.jpg 800w"
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              alt="Fotografia de Marte tirada pela sonda Rosetta, com o planeta alaranjado sobre fundo negro"
+              class="w-full aspect-square object-cover bg-black"
+              width="400" height="400"
+              loading="lazy">
+            <div class="flex flex-col grow p-5">
+              <h3 class="text-lg font-bold leading-tight">Marte</h3>
+              <p class="grow my-4 text-suave">O planeta vermelho. Tem o maior vulcão do Sistema Solar: o Olympus Mons.</p>
+              <a href="marte.html" class="font-semibold text-destaque hover:text-destaque-claro">Ver página de Marte →</a>
+            </div>
+          </article>
+
+          <article class="flex flex-col overflow-hidden rounded-xl border border-borda bg-superficie transition-transform duration-200 hover:-translate-y-1">
+            <img src="img/jupiter.svg" alt="Ilustração de Júpiter com riscas e a Grande Mancha Vermelha" class="w-full aspect-square object-cover p-6 bg-[#0e1428]" width="300" height="300">
+            <div class="flex flex-col grow p-5">
+              <h3 class="text-lg font-bold leading-tight">Júpiter</h3>
+              <p class="grow my-4 text-suave">O maior planeta. Caberiam lá dentro mais de 1300 Terras.</p>
+              <a href="https://science.nasa.gov/jupiter/" target="_blank" rel="noopener" class="font-semibold text-destaque hover:text-destaque-claro">Saber mais na NASA ↗</a>
+            </div>
+          </article>
+
+          <article class="flex flex-col overflow-hidden rounded-xl border border-borda bg-superficie transition-transform duration-200 hover:-translate-y-1">
+            <img src="img/saturno.svg" alt="Ilustração de Saturno com os seus anéis" class="w-full aspect-square object-cover p-6 bg-[#0e1428]" width="300" height="300">
+            <div class="flex flex-col grow p-5">
+              <h3 class="text-lg font-bold leading-tight">Saturno</h3>
+              <p class="grow my-4 text-suave">Famoso pelos anéis, feitos de gelo e rocha. É tão pouco denso que flutuaria em água.</p>
+              <a href="https://science.nasa.gov/saturn/" target="_blank" rel="noopener" class="font-semibold text-destaque hover:text-destaque-claro">Saber mais na NASA ↗</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EM NÚMEROS (ÍCONES SVG) =====
+         group (no li) + group-hover: (no svg) → ao passar o rato no item,
+         o ícone cresce e muda de cor. Como o SVG usa stroke="currentColor",
+         basta mudar a cor do texto (text-...). -->
+    <section class="py-12 bg-superficie" aria-labelledby="titulo-numeros">
+      <div class="w-full max-w-site mx-auto px-4">
+        <h2 id="titulo-numeros" class="mb-4 text-center text-[clamp(1.4rem,3vw,1.9rem)] font-bold leading-tight">O Sistema Solar em números</h2>
+
+        <!-- 2 colunas no telemóvel, 4 em lg -->
+        <ul class="mt-8 grid grid-cols-2 gap-6 lg:grid-cols-4">
+
+          <li class="group flex flex-col items-center gap-1 text-center">
+            <svg class="size-12 mb-2 text-destaque transition duration-200 group-hover:scale-115 group-hover:text-[#ffd27a]" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+            </svg>
+            <strong class="text-[2rem] leading-none">1</strong>
+            <span class="text-[0.9rem] text-suave">estrela: o Sol</span>
+          </li>
+
+          <li class="group flex flex-col items-center gap-1 text-center">
+            <svg class="size-12 mb-2 text-destaque transition duration-200 group-hover:scale-115 group-hover:text-[#ffd27a]" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="5"/>
+              <ellipse cx="12" cy="12" rx="10.5" ry="3.5" transform="rotate(-20 12 12)"/>
+            </svg>
+            <strong class="text-[2rem] leading-none">8</strong>
+            <span class="text-[0.9rem] text-suave">planetas</span>
+          </li>
+
+          <li class="group flex flex-col items-center gap-1 text-center">
+            <svg class="size-12 mb-2 text-destaque transition duration-200 group-hover:scale-115 group-hover:text-[#ffd27a]" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 2"/>
+            </svg>
+            <strong class="text-[2rem] leading-none">4,6</strong>
+            <span class="text-[0.9rem] text-suave">mil milhões de anos de idade</span>
+          </li>
+
+          <li class="group flex flex-col items-center gap-1 text-center">
+            <svg class="size-12 mb-2 text-destaque transition duration-200 group-hover:scale-115 group-hover:text-[#ffd27a]" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/>
+            </svg>
+            <strong class="text-[2rem] leading-none">150</strong>
+            <span class="text-[0.9rem] text-suave">milhões de km entre a Terra e o Sol</span>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== CHAMADA PARA A INSCRIÇÃO ===== -->
+    <section class="py-12 bg-superficie">
+      <div class="w-full max-w-site mx-auto px-4 text-center">
+        <h2 class="mb-4 text-[clamp(1.4rem,3vw,1.9rem)] font-bold leading-tight">Queres ver Saturno ao telescópio?</h2>
+        <p class="max-w-[50ch] mx-auto mb-6 text-suave">Organizamos noites de observação gratuitas. Inscreve-te e traz a família.</p>
+        <a href="inscricao.html" class="inline-block px-6 py-3 rounded-xl bg-destaque text-[#1a1a1a] font-semibold transition-colors hover:bg-destaque-escura hover:text-white focus:bg-destaque-escura focus:text-white">Inscrever-me</a>
+      </div>
+    </section>
+
+    <!-- ===== CURIOSIDADE ===== -->
+    <section class="py-12">
+      <div class="w-full max-w-site mx-auto px-4">
+        <blockquote class="text-center text-xl italic">
+          <p>A luz do Sol demora cerca de 8 minutos e 20 segundos a chegar à Terra.</p>
+          <cite class="block mt-2 text-[0.9rem] text-suave">— Curiosidade astronómica</cite>
+        </blockquote>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== RODAPÉ ===== -->
+  <footer class="py-6 bg-superficie border-t border-borda text-[0.9rem] text-suave">
+    <div class="w-full max-w-site mx-auto px-4 flex flex-col items-center gap-2 text-center md:flex-row md:justify-between md:text-left">
+      <p>Projeto escolar · Sistema Solar<br>
+        <small>Foto de Marte: ESA &amp; MPS for OSIRIS Team (CC BY-SA 3.0 IGO)</small></p>
+      <ul class="flex flex-wrap justify-center gap-4">
+        <li><a href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener" class="text-destaque underline hover:text-destaque-claro">NASA</a></li>
+        <li><a href="https://www.esa.int/Science_Exploration/Space_Science" target="_blank" rel="noopener" class="text-destaque underline hover:text-destaque-claro">ESA</a></li>
+        <li><a href="#topo" class="text-destaque underline hover:text-destaque-claro">Voltar ao topo ↑</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

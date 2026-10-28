@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tudo sobre Marte, o planeta vermelho.">
+  <title>Marte | Sistema Solar</title>
+
+  <!-- Tailwind CSS v4 (versão "browser") + tema do site (igual em todas as páginas) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-fundo: #0b1020;
+      --color-superficie: #161d33;
+      --color-texto: #e6e9f2;
+      --color-suave: #a3abc2;
+      --color-destaque: #ff8a3d;
+      --color-destaque-escura: #e06a1c;
+      --color-destaque-claro: #ffb27a;
+      --color-borda: #2a3352;
+      --container-site: 1100px;
+    }
+  </style>
+</head>
+<body class="bg-fundo text-texto leading-relaxed">
+
+  <header id="topo" class="sticky top-0 z-10 bg-superficie border-b border-borda">
+    <div class="w-full max-w-site mx-auto px-4 py-3 flex flex-col items-center gap-2 md:flex-row md:justify-between">
+      <a href="index.html" class="text-xl font-bold text-texto">☀ Sistema Solar</a>
+      <nav aria-label="Navegação principal">
+        <ul class="flex flex-wrap justify-center gap-x-4 gap-y-2">
+          <li><a href="index.html" class="py-1 border-b-2 border-transparent text-suave hover:text-texto hover:border-destaque">Início</a></li>
+          <li><a href="index.html#planetas" class="py-1 border-b-2 border-transparent text-suave hover:text-texto hover:border-destaque">Planetas</a></li>
+          <!-- aria-current indica a página atual a leitores de ecrã -->
+          <li><a href="marte.html" aria-current="page" class="py-1 border-b-2 border-destaque text-texto">Marte</a></li>
+          <li><a href="inscricao.html" class="py-1 border-b-2 border-transparent text-suave hover:text-texto hover:border-destaque">Inscrição</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="w-full max-w-site mx-auto px-4">
+
+    <!-- "Trilho" de navegação -->
+    <nav class="py-4 text-[0.9rem] text-suave" aria-label="Trilho de navegação">
+      <a href="index.html" class="text-destaque underline hover:text-destaque-claro">Início</a> / <span>Marte</span>
+    </nav>
+
+    <!-- 1 coluna no telemóvel; em lg: artigo (2fr) + barra lateral (1fr) -->
+    <div class="grid grid-cols-1 gap-8 pb-12 lg:grid-cols-[2fr_1fr]">
+
+      <!-- ===== ARTIGO PRINCIPAL ===== -->
+      <article>
+        <p class="inline-block mb-2 text-[0.8rem] uppercase tracking-[0.08em] text-destaque">Planeta rochoso · 4.º a partir do Sol</p>
+        <h1 class="mb-4 text-[clamp(1.8rem,5vw,3rem)] font-bold leading-tight">Marte, o planeta vermelho</h1>
+
+        <figure class="my-6">
+          <!-- aspect-[4/3] + object-cover → corta a foto quadrada num retângulo
+               object-[center_75%] → escolhe que parte da foto fica visível -->
+          <img src="img/marte-viking-800.jpg"
+               srcset="img/marte-viking-400.jpg 400w,
+                       img/marte-viking-800.jpg 800w,
+                       img/marte-viking-1200.jpg 1200w"
+               sizes="(min-width: 1024px) 700px, 100vw"
+               alt="Fotografia de Marte com o longo desfiladeiro Valles Marineris a atravessar o planeta"
+               class="w-full rounded-xl aspect-[4/3] object-cover object-[center_75%]"
+               width="1200" height="1200">
+          <figcaption class="mt-2 text-center text-[0.85rem] text-suave">
+            Marte visto pelas sondas Viking. A "cicatriz" escura a meio é o Valles Marineris,
+            um desfiladeiro com mais de 4000 km.
+            <small class="block mt-1 text-xs opacity-80">Imagem: NASA/JPL-Caltech (PIA00407)</small>
+          </figcaption>
+        </figure>
+
+        <!-- Índice: border-l-4 → barra laranja à esquerda.
+             list-decimal → o Tailwind tira os números das listas; aqui voltamos a pô-los. -->
+        <nav class="px-6 py-4 rounded-xl border-l-4 border-destaque bg-superficie" aria-label="Índice do artigo">
+          <h2 class="mb-2 text-[1.1rem] font-bold leading-tight">Nesta página</h2>
+          <ol class="pl-5 list-decimal">
+            <li><a href="#cor" class="text-destaque underline hover:text-destaque-claro">Porque é vermelho?</a></li>
+            <li><a href="#vulcao" class="text-destaque underline hover:text-destaque-claro">O maior vulcão</a></li>
+            <li><a href="#missoes" class="text-destaque underline hover:text-destaque-claro">Missões a Marte</a></li>
+          </ol>
+        </nav>
+
+        <!-- scroll-mt-24 → evita que o título fique tapado pelo cabeçalho fixo -->
+        <section id="cor" class="mt-8 scroll-mt-24">
+          <h2 class="mb-4 text-[clamp(1.4rem,3vw,1.9rem)] font-bold leading-tight">Porque é vermelho?</h2>
+          <p class="my-4">
+            A superfície de Marte está coberta de poeira rica em <strong>óxido de ferro</strong>,
+            o mesmo composto que forma a ferrugem. É essa poeira que dá ao planeta
+            a sua cor avermelhada característica.
+          </p>
+        </section>
+
+        <section id="vulcao" class="mt-8 scroll-mt-24">
+          <h2 class="mb-4 text-[clamp(1.4rem,3vw,1.9rem)] font-bold leading-tight">O maior vulcão</h2>
+          <p class="my-4">
+            O <em>Olympus Mons</em> tem cerca de 22 km de altura — quase três vezes
+            a altura do Monte Evereste. A sua base é tão larga que cobriria
+            grande parte de Portugal continental.
+          </p>
+        </section>
+
+        <section id="missoes" class="mt-8 scroll-mt-24">
+          <h2 class="mb-4 text-[clamp(1.4rem,3vw,1.9rem)] font-bold leading-tight">Missões a Marte</h2>
+          <p class="my-4">
+            Vários robôs já exploraram a superfície marciana. O rover
+            <a href="https://science.nasa.gov/mission/mars-2020-perseverance/" target="_blank" rel="noopener" class="text-destaque underline hover:text-destaque-claro">Perseverance</a>
+            procura sinais de vida antiga, e o pequeno helicóptero
+            <em>Ingenuity</em> foi o primeiro aparelho a voar noutro planeta.
+          </p>
+          <p class="my-4">
+            A Agência Espacial Europeia também tem um programa dedicado:
+            <a href="https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Exploration/ExoMars" target="_blank" rel="noopener" class="text-destaque underline hover:text-destaque-claro">ExoMars</a>.
+          </p>
+        </section>
+      </article>
+
+      <!-- ===== BARRA LATERAL =====
+           self-start → não estica até à altura do artigo
+           lg:sticky lg:top-20 → em ecrãs grandes acompanha o scroll -->
+      <aside class="self-start p-6 rounded-xl border border-borda bg-superficie lg:sticky lg:top-20">
+        <!-- rounded-full → recorta a foto em círculo -->
+        <img src="img/marte-osiris-400.jpg"
+             alt="Fotografia de Marte tirada pela sonda Rosetta"
+             class="w-[180px] mx-auto mb-4 rounded-full" width="400" height="400" loading="lazy">
+        <h2 class="mb-4 text-center text-xl font-bold leading-tight">Ficha técnica</h2>
+
+        <!-- overflow-x-auto → se a tabela não couber, faz scroll lateral -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-[0.95rem]">
+            <tbody>
+              <tr>
+                <th scope="row" class="px-2 py-2.5 border-b border-borda text-left font-medium text-suave"><img src="img/icones/diametro.svg" alt="" class="inline-block size-[1.1rem] mr-1.5 align-[-0.2rem]"> Diâmetro</th>
+                <td class="px-2 py-2.5 border-b border-borda">6 779 km</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-2 py-2.5 border-b border-borda text-left font-medium text-suave"><img src="img/icones/relogio.svg" alt="" class="inline-block size-[1.1rem] mr-1.5 align-[-0.2rem]"> Duração do dia</th>
+                <td class="px-2 py-2.5 border-b border-borda">24 h 37 min</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-2 py-2.5 border-b border-borda text-left font-medium text-suave"><img src="img/icones/calendario.svg" alt="" class="inline-block size-[1.1rem] mr-1.5 align-[-0.2rem]"> Duração do ano</th>
+                <td class="px-2 py-2.5 border-b border-borda">687 dias terrestres</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-2 py-2.5 border-b border-borda text-left font-medium text-suave"><img src="img/icones/lua.svg" alt="" class="inline-block size-[1.1rem] mr-1.5 align-[-0.2rem]"> Luas</th>
+                <td class="px-2 py-2.5 border-b border-borda">2 (Fobos e Deimos)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-2 py-2.5 border-b border-borda text-left font-medium text-suave"><img src="img/icones/termometro.svg" alt="" class="inline-block size-[1.1rem] mr-1.5 align-[-0.2rem]"> Temperatura média</th>
+                <td class="px-2 py-2.5 border-b border-borda">≈ −63 °C</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-center text-xs opacity-80 text-suave">Imagem: ESA &amp; MPS for OSIRIS Team (CC BY-SA 3.0 IGO)</p>
+
+        <!-- Botão largo: block + text-center -->
+        <a href="index.html#planetas" class="block mt-6 px-6 py-3 rounded-xl text-center bg-destaque text-[#1a1a1a] font-semibold transition-colors hover:bg-destaque-escura hover:text-white focus:bg-destaque-escura focus:text-white">← Voltar aos planetas</a>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer class="py-6 bg-superficie border-t border-borda text-[0.9rem] text-suave">
+    <div class="w-full max-w-site mx-auto px-4 flex flex-col items-center gap-2 text-center md:flex-row md:justify-between md:text-left">
+      <p>Projeto escolar · Sistema Solar</p>
+      <ul class="flex flex-wrap justify-center gap-4">
+        <li><a href="https://science.nasa.gov/mars/" target="_blank" rel="noopener" class="text-destaque underline hover:text-destaque-claro">NASA</a></li>
+        <li><a href="https://www.esa.int/Science_Exploration/Space_Science" target="_blank" rel="noopener" class="text-destaque underline hover:text-destaque-claro">ESA</a></li>
+        <li><a href="#topo" class="text-destaque underline hover:text-destaque-claro">Voltar ao topo ↑</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
